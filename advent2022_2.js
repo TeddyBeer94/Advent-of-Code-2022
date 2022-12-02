@@ -1,5 +1,5 @@
 import fs from 'fs';
-const array = fs.readFileSync('adv2022_2_file', 'utf8').split('\n'); // il faut retirer la ligne blanche à la fichier input
+const array = fs.readFileSync('adv2022_2_file', 'utf8').split('\n'); // il faut retirer la ligne blanche à la fin du fichier input
 const a0 = array.map((v,i) => v.split(' '))
 const arrayf = a0.map((v,i) => ({opponent : v[0] , mymove : v[1]}))
 
