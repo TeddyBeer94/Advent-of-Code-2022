@@ -1,5 +1,7 @@
 import fs from 'fs';
+console.time('\nExecution time')
 const array = fs.readFileSync('adv2022_5_file', 'utf8').split('\n\n')
+
 const moves = array[1].split('\n').filter(x =>x).map((v,i) =>({
     nbmoves : Number(v.split(' ')[1]) ,
     from : Number(v.split(' ')[3]) ,
@@ -57,4 +59,4 @@ const allmoves2 = moves.map((v,i) => {
 })
 
 console.log(col_stack.map((v,i) => v[0]))
-
+console.timeEnd('\nExecution time')

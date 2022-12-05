@@ -1,4 +1,5 @@
 import fs from 'fs';
+console.time('\nExecution time')
 const array = fs.readFileSync('adv2022_3_file', 'utf8').split('\n').filter(x => x); 
 const alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
 const arraysplit = array.map((v,i) => ({firsthalf : v.slice(0,v.length/2).split('') , secondhalf : v.slice(v.length/2).split('')}))
@@ -25,3 +26,4 @@ const arrayfilter3 = arrayfilter2.map((v,i) =>
 )
 const result2 = arrayfilter3.reduce((acc,cur) => acc + value(cur.letter), 0)
 console.log(result2)
+console.timeEnd('\nExecution time')

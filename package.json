@@ -8,9 +8,11 @@
         "format:check": "prettier --check .",
         "format:write": "prettier --write .",
         "day1": "node advent2022_1.js",
-        "day2": "node advent2020_2.js",
-        "day3": "node advent2020_3.js",
-        "day4": "node advent2020_4.js",
+        "day2": "node advent2022_2.js",
+        "day3": "node advent2022_3.js",
+        "day4": "node advent2022_4.js",
+        "day5": "node advent2022_5.js",
+        "test": "node test.js",
         "start": "ts-node ./src/index.ts"
     },
     "devDependencies": {

@@ -1,4 +1,5 @@
 import fs from 'fs';
+console.time('\nExecution time')
 const array = fs.readFileSync('adv2022_2_file', 'utf8').split('\n'); // il faut retirer la ligne blanche à la fin du fichier input
 const a0 = array.map((v,i) => v.split(' '))
 const arrayf = a0.map((v,i) => ({opponent : v[0] , mymove : v[1]}))
@@ -50,7 +51,7 @@ const arrayf2_score = arrayf2.map((v,i) => ({mymove_score : mymove_score(v) , sc
 const result2 = arrayf2_score.reduce((acc,cur) => 
 {return acc + cur.mymove_score+ cur.score},0)
 console.log(result2)
-
+console.timeEnd('\nExecution time')
 
 
 
