@@ -36,7 +36,7 @@ const allmoves = moves.reduce((acc,cur) => {
     return move_n({tab : acc , nbmoves : cur.nbmoves , from : cur.from , to : cur.to})
 }, col_stack)
 
-console.log(allmoves.map((v,i) => v[0]))
+console.log(allmoves.reduce((acc,cur) => acc.concat(cur[0].split('')[1]),''))
 
 var col_stack = zeros.map((v,i) => rowstack.map((w,j) =>  w[i]))
     .map((v,i) => v.filter((w,j) => j+1< v.length))
@@ -61,5 +61,5 @@ const allmoves2 = moves.reduce((acc,cur) => {
 }, col_stack)
 
 
-console.log(allmoves2.map((v,i) => v[0]))
+console.log(allmoves2.reduce((acc,cur) => acc.concat(cur[0].split('')[1]),''))
 console.timeEnd('\nExecution time')
