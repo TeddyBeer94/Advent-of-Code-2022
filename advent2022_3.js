@@ -17,13 +17,9 @@ console.log(result1)
 const a = array.filter((v,i) => i%3==0) 
 const arraygroups = a.map((v,i) => ({l1 : array[3*i].split(''), l2 : array[3*i +1].split(''), l3: array[3*i +2].split('')}))
 
-const arrayfilter2 = arraygroups.map((v,i) =>
-    ({... v , letters : inter({firsthalf : v.l1 , secondhalf : v.l2})})
+const arrayf = arraygroups.map((v,i) =>
+    ({letter : inter({firsthalf : inter({firsthalf : v.l1 , secondhalf : v.l2}) , secondhalf : v.l3})[0]})
 )
-
-const arrayfilter3 = arrayfilter2.map((v,i) =>
-    ({... v , letter : inter({firsthalf : v.letters , secondhalf : v.l3})[0]})
-)
-const result2 = arrayfilter3.reduce((acc,cur) => acc + value(cur.letter), 0)
+const result2 = arrayf.reduce((acc,cur) => acc + value(cur.letter), 0)
 console.log(result2)
 console.timeEnd('\nExecution time')
