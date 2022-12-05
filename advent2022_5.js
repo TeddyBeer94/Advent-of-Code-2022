@@ -38,6 +38,9 @@ const allmoves = moves.reduce((acc,cur) => {
 
 console.log(allmoves.map((v,i) => v[0]))
 
+var col_stack = zeros.map((v,i) => rowstack.map((w,j) =>  w[i]))
+    .map((v,i) => v.filter((w,j) => j+1< v.length))
+    .map((v,i) => v.filter(x => x!= ''))
     
 const move_n2 = (({tab,nbmoves,from,to}) => {
     if (nbmoves >= tab[from -1]) {
