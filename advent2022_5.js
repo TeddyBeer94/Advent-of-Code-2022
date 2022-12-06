@@ -19,15 +19,13 @@ const rev = ((tab) => tab.map((v,i) => tab[tab.length -1 -i]))
 const move_n = (({tab,nbmoves,from,to}) => {
     if (nbmoves >= tab[from -1].length) {
         const moved = tab[from -1]
-        var x = rev(tab[to-1])
-        tab[to-1] = rev(x.concat(moved))
+        tab[to-1] = rev(moved).concat(tab[to-1])
         tab[from-1] = []
     }
     else {
         const moved = tab[from -1].slice(0,nbmoves)
         tab[from-1] = tab[from -1].slice(nbmoves)
-        var x = rev(tab[to-1])
-        tab[to-1] = rev(x.concat(moved))
+        tab[to-1] = rev(moved).concat(tab[to-1])
     }
     return tab
 })
