@@ -12,6 +12,7 @@
         "day3": "node advent2022_3.js",
         "day4": "node advent2022_4.js",
         "day5": "node advent2022_5.js",
+        "day6": "node advent2022_6.js",
         "test": "node test.js",
         "start": "ts-node ./src/index.ts"
     },
