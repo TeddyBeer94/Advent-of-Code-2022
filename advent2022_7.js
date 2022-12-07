@@ -3,15 +3,14 @@ console.time('\nExecution time')
 const array = fs.readFileSync('adv2022_7_file', 'utf8').split('$')
 const commandes = array.map((v,i) =>({
     commande : v.split('\n')[0].split(' ').slice(1) ,
-    output : v.split('\n').filter(x=>x).slice(1).filter(x => x!= '').map((w,j) => {
+    output : v.split('\n').filter(x=>x).slice(1).map((w,j) => {
         if (w.split(' ')[0] == 'dir') {
-            return {type : 'dir' , name : w.split(' ')[1],size : 0}
+            return {type : 'dir' , name : w.split(' ')[1]}
         }
         else return {type : 'file' , name : w.split(' ')[1], size : Number(w.split(' ')[0])}
     })})).slice(1)
-
+    
 const dict = new Object()
-
 
 const a1 =commandes.reduce((acc,cur) => {
     var x = cur.commande[0]
@@ -24,7 +23,6 @@ const a1 =commandes.reduce((acc,cur) => {
     else {
         dict[acc.path] = {
             name : acc.currentpos,
-            type : 'dir', 
             sons : cur.output}}
     return {path : acc.path , currentpos : acc.currentpos}
 },{currentpos : '/', path : []})
@@ -46,6 +44,6 @@ const emptyspace = 70000000-sizedir(['/'])
 const todelete = 30000000 - emptyspace
 
 const arraysize = arraydir.filter(x => x.size >= todelete).map((v,i) => v.size)
-console.log(arraysize.reduce((acc,cur) => {if (acc > cur) {return cur} else return acc} , sizedir(['/'])))
+console.log(Math.min(...arraysize))
 
 console.timeEnd('\nExecution time')
