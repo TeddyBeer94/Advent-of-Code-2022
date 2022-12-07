@@ -18,7 +18,7 @@ const a1 =commandes.reduce((acc,cur) => {
     if (x == 'cd'){
         if (cur.commande[1] =='/') {acc.path = ['/'],acc.currentpos = '/'}
         else {
-            if (cur.commande[1] == '..') {acc.currentpos = acc.path[acc.path.length-2], acc.path = acc.path.filter((v,i) => i+1 < acc.path.length)}
+            if (cur.commande[1] == '..') {acc.currentpos = acc.path[acc.path.length-2], acc.path.pop()}
             else {acc.path.push(cur.commande[1]),acc.currentpos = cur.commande[1]} }
         }       
     else {
