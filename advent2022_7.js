@@ -34,15 +34,15 @@ const sizedir = ((path) => {
         return acc + sizedir(path.concat(cur.name))}},0)
     })
 
-const arraydir = Object.entries(dict).map((v,i) => ({size : sizedir(v[0].split(','))}))
+const arraysize = Object.entries(dict).map((v,i) => ({size : sizedir(v[0].split(','))}))
 
-const arrayfilter = arraydir.filter(x => x.size <=100000)
-const result1 = arrayfilter.reduce((acc,cur) => acc + cur.size , 0)
+const arrayfilter1 = arraysize.filter(x => x.size <=100000)
+const result1 = arrayfilter1.reduce((acc,cur) => acc + cur.size , 0)
 
 const todelete = sizedir(['/']) - 40000000
 
-const arraysize = arraydir.filter(x => x.size >= todelete).map((v,i) => v.size)
-const result2 = Math.min(...arraysize)
+const arrayfilter2 = arraysize.filter(x => x.size >= todelete).map((v,i) => v.size)
+const result2 = Math.min(...arrayfilter2)
 
 console.timeEnd('\nExecution time')
 console.log(result1)
