@@ -7,7 +7,7 @@ const commandes = array.map((v,i) =>({
         if (w.split(' ')[0] == 'dir') {
             return {type : 'dir' , name : w.split(' ')[1]}
         }
-        else return {type : 'file' , name : w.split(' ')[1], size : Number(w.split(' ')[0])}
+        else return {type : 'file' , size : Number(w.split(' ')[0])}
     })})).slice(1)
 
 const dict = new Object()
@@ -15,17 +15,16 @@ const dict = new Object()
 const a1 =commandes.reduce((acc,cur) => {
     var x = cur.commande[0]
     if (x == 'cd'){
-        if (cur.commande[1] =='/') {acc.path = ['/'],acc.currentpos = '/'}
+        if (cur.commande[1] =='/') {acc.path = ['/']}
         else {
-            if (cur.commande[1] == '..') {acc.currentpos = acc.path[acc.path.length-2], acc.path.pop()}
-            else {acc.path.push(cur.commande[1]),acc.currentpos = cur.commande[1]} }
+            if (cur.commande[1] == '..') {acc.path.pop()}
+            else {acc.path.push(cur.commande[1])} }
         }       
     else {
         dict[acc.path] = {
-            name : acc.currentpos,
             sons : cur.output}}
-    return {path : acc.path , currentpos : acc.currentpos}
-},{currentpos : '/', path : []})
+    return {path : acc.path }
+},{path : []})
 
 
 const sizedir = ((path) => {
@@ -35,14 +34,12 @@ const sizedir = ((path) => {
         return acc + sizedir(path.concat(cur.name))}},0)
     })
 
-const arraydir = Object.entries(dict).map((v,i) => ({...v[1], size : sizedir(v[0].split(','))}))
+const arraydir = Object.entries(dict).map((v,i) => ({size : sizedir(v[0].split(','))}))
 
 const arrayfilter = arraydir.filter(x => x.size <=100000)
 const result1 = arrayfilter.reduce((acc,cur) => acc + cur.size , 0)
 
-
-const emptyspace = 70000000-sizedir(['/'])
-const todelete = 30000000 - emptyspace
+const todelete = sizedir(['/']) - 40000000
 
 const arraysize = arraydir.filter(x => x.size >= todelete).map((v,i) => v.size)
 const result2 = Math.min(...arraysize)
