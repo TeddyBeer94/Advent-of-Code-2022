@@ -20,38 +20,38 @@ const operation = ((tab) => tab.reduce((acc,cur,index)=> {
 
 const count_sight = ((height , line) => rev(line).reduce((acc,cur) => {
     if (acc.stop == false) {
-        { acc.tot = acc.tot +1}
+        {acc.tot = acc.tot +1}
         if (height <= cur.height) {acc.stop = true} 
     }
     return acc
 }, {tot : 0, stop : false}))
 
 
-const testleft = ((indexl,tab)=> operation(tab[indexl]))
+const testleft = ((indexl)=> operation(lines[indexl]))
 
-const testright = ((indexl,tab)=> operation(rev(tab[indexl])))
+const testright = ((indexl)=> operation(rev(lines[indexl])))
 
 const testtop = ((indexcol) => operation(getcol(indexcol)))
 
 const testbot = ((indexcol) => operation(rev(getcol(indexcol))))
 
-const all_lines = lines.map((v,i) => {
-    testleft(i,lines)
-    testright(i,lines)
+lines.map((v,i) => {
+    testleft(i)
+    testright(i)
 })
 
-const allcols = getcol(0).map((v,i) => {
+getcol(0).map((v,i) => {
     testtop(i)
     testbot(i)
 })
 
-const countseen = ((indexl) => lines[indexl].reduce((acc,cur) => {
+const countseen = ((line) => line.reduce((acc,cur) => {
     if (cur.seen == true) {return acc + 1}
     else return acc
 },0))
 
-const result1 = lines.reduce((acc,cur,index) => {
-    return acc + countseen(index)
+const result1 = lines.reduce((acc,cur) => {
+    return acc + countseen(cur)
     },0)
 
 const result2 = lines.reduce((acc,cur) => {
@@ -66,5 +66,3 @@ console.timeEnd('\nExecution time')
 
 console.log(result1)
 console.log(result2)
-
-
