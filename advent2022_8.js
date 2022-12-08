@@ -24,7 +24,6 @@ const count_sight = ((height , line) => rev(line).reduce((acc,cur) => {
     return acc
 }, {tot : 0, stop : false}))
 
-
 const testleft = ((indexl)=> operation(lines[indexl]))
 
 const testright = ((indexl)=> operation(rev(lines[indexl])))
