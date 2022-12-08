@@ -3,11 +3,12 @@ console.time('\nExecution time')
 const array = fs.readFileSync('adv2022_8_file', 'utf8').trim().split('\n');
 var lines = array.map((v,i) => v.split('').map((w,j) => ({height:Number(w) , seen : false,score :1})))
 
+const rev = ((tab) => tab.map((v,i) => tab[tab.length -1 -i]))
 
 const getcol = ((indexcol) => lines.map((v,i) => v[indexcol]))
 
 const operation = ((tab) => tab.reduce((acc,cur)=> {
-    if (cur.height > acc.height ) {cur.seen = true , acc.height = cur.height}
+    if (cur.height > acc.height ) {cur.seen = true , acc.height = cur.height }
     cur.score = cur.score * count_sight(cur.height,acc.line).tot
     acc.line.push(cur.height)
     return acc
@@ -15,7 +16,7 @@ const operation = ((tab) => tab.reduce((acc,cur)=> {
 , {height : -1 , line : []}
 ))
 
-const count_sight = ((height , line) => line.reverse().reduce((acc,cur) => {
+const count_sight = ((height , line) => rev(line).reduce((acc,cur) => {
     if (acc.stop == false) {
         {acc.tot = acc.tot +1}
         if (height <= cur) {acc.stop = true} 
@@ -26,11 +27,11 @@ const count_sight = ((height , line) => line.reverse().reduce((acc,cur) => {
 
 const testleft = ((indexl)=> operation(lines[indexl]))
 
-const testright = ((indexl)=> operation(lines[indexl].reverse()))
+const testright = ((indexl)=> operation(rev(lines[indexl])))
 
 const testtop = ((indexcol) => operation(getcol(indexcol)))
 
-const testbot = ((indexcol) => operation(getcol(indexcol).reverse()))
+const testbot = ((indexcol) => operation(rev(getcol(indexcol))))
 
 lines.map((v,i) => {
     testleft(i)
