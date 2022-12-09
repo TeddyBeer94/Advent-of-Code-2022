@@ -5,8 +5,9 @@ const instructions = array.map((v,i) => ({direction : v.split(' ')[0], nbmoves :
 
 var head = {x : 0 , y : 0}
 var tail = {x : 0, y : 0}
+var visited1 = new Set()
 
-const dist = ((x1,y1,x2,y2) => (x1-x2)*(x1-x2) + (y1-y2)*(y1-y2))
+const dist = ((x1,y1,x2,y2) => (x1-x2)**2 + (y1-y2)**2)
 
 const movehead = ((direction,mover) =>{
     switch (direction) {
@@ -25,22 +26,10 @@ const signe = ((x) => {
 
 const movetail = ((mover,follower) => {
     if (dist(mover.x, mover.y,follower.x,follower.y)>=4) {
-        if (mover.x == follower.x) {
-            return {x : follower.x , y : follower.y + (mover.y -follower.y)/2}
-        }
-        else {
-            if (mover.y == follower.y) {
-                return {x : follower.x + (mover.x -follower.x)/2 , y : follower.y}
-            }   
-            else {
-                return {x : follower.x + signe(mover.x - follower.x), y : follower.y + signe(mover.y - follower.y)}
-            }
-        }
+        return {x : follower.x + signe(mover.x - follower.x), y : follower.y + signe(mover.y - follower.y)}
     }
     return {x : follower.x , y : follower.y}
 })
-
-var visited1 = new Set()
 
 const follow_inst = (({direction,nbmoves}) => {
     Array.from({length : nbmoves}).map(() => {
@@ -51,7 +40,6 @@ const follow_inst = (({direction,nbmoves}) => {
 })
 
 instructions.map((v,i) => {follow_inst(v)})
-
 const result1 = visited1.size
 
 var rope = Array.from({length : 10} , (v,i) => ({x:0 , y:0}))
@@ -69,15 +57,14 @@ const moverope = ((direction) => rope.reduce((acc,cur,index) => {
         cur.x = newpos.x
         cur.y = newpos.y
         if (index ==9) {
-            visited2.add(rope[index].x.toString()+","+rope[index].y.toString())
+            visited2.add(cur.x.toString()+","+cur.y.toString())
         }
         return cur
     }
 }, {x: 0, y : 0}))
 
 const moveropen = (({direction,nbmoves}) => 
-Array.from({length : nbmoves}).map(() => {moverope(direction)}
-))
+Array.from({length : nbmoves}).map(() => {moverope(direction)}))
 
 instructions.map((v,i) => moveropen(v))
 const result2 = visited2.size
@@ -85,4 +72,3 @@ const result2 = visited2.size
 console.timeEnd('\nExecution time')
 console.log(result1)
 console.log(result2)
-
