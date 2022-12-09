@@ -50,6 +50,7 @@ const follow_inst = (({direction,nbmoves}) => {
         visited1.add(tail.x.toString()+","+tail.y.toString())
     })
 })
+
 instructions.map((v,i) => {follow_inst(v)})
 
 const result1 = visited1.size
@@ -59,25 +60,27 @@ var visited2 = new Set()
 
 const moverope = ((direction) => rope.reduce((acc,cur,index) => {
     if (index ==0) {
-        rope[index] = movehead(direction,cur)
-        return rope[index]
+        let newpos = movehead(direction,cur)
+        cur.x = newpos.x
+        cur.y = newpos.y
+        return cur
     }
     else {
-        rope[index] = movetail(acc,cur)
+        let newpos = movetail(acc,cur)
+        cur.x = newpos.x
+        cur.y = newpos.y
         if (index ==9) {
             visited2.add(rope[index].x.toString()+","+rope[index].y.toString())
         }
-        return rope[index]
+        return cur
     }
 }, {x: 0, y : 0}))
 
-const moveropen = (({direction,nbmoves}) => {
-    for (let i = 0; i < nbmoves; i++) {
-        moverope(direction)
-    }
-})
+const moveropen = (({direction,nbmoves}) => 
+Array.from({length : nbmoves}).map(() => {moverope(direction)}
+))
 
-instructions.map((v,i) => moveropen({direction : v.direction, nbmoves : v.nbmoves}))
+instructions.map((v,i) => moveropen(v))
 const result2 = visited2.size
 
 console.timeEnd('\nExecution time')
