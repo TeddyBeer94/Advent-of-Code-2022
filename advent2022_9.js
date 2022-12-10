@@ -1,6 +1,6 @@
 import fs from 'fs';
 console.time('\nExecution time')
-const array = fs.readFileSync('adv2022_9_file', 'utf8').trim().split('\n');
+const array = fs.readFileSync('input.txt', 'utf8').trim().split('\n');
 const instructions = array.map((v,i) => ({direction : v.split(' ')[0], nbmoves : Number(v.split(' ')[1])}))
 
 var head = {x : 0 , y : 0}
