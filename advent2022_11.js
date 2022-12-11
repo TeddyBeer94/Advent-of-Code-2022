@@ -12,7 +12,6 @@ var monkeys = array.map((v,i) => ({
     False : Number(v.split('\n')[5].split('monkey ')[1]),
     score : 0
 }))
-
 let copy_m = JSON.parse(JSON.stringify(monkeys))
 
 const new_anxietey1  = ((anxiety,op,right) => {
@@ -27,14 +26,14 @@ const new_anxietey1  = ((anxiety,op,right) => {
 
 const moveItem = ((monkey,new_anx) => {
     let anxiety =  new_anx(monkey.items[0], monkey.op, monkey.right)
-    let x = monkeys[monkey.number].items.shift()
+    monkey.items.shift()
     if (anxiety % monkey.Test == 0) {
         monkeys[monkey.True].items.push(anxiety)
     } 
     else {
         monkeys[monkey.False].items.push(anxiety)
     }
-    monkeys[monkey.number].score += 1
+    monkey.score += 1
 })
 
 const turn = ((monkey,new_anx) => {
@@ -50,7 +49,6 @@ const scores = monkeys.map((v,i) => v.score).sort((a,b) => b-a)
 const result1 = scores[0]*scores[1]
 
 monkeys = copy_m
-
 const prodTest = monkeys.reduce((acc,cur) => acc * cur.Test ,1)
 
 const new_anxietey2 = ((anxiety,op,right) => {
