@@ -3,8 +3,7 @@ console.time('\nExecution time')
 const array = fs.readFileSync('adv2022_11_file', 'utf8').trim().split('\n\n');
 
 var monkeys = array.map((v,i) => ({
-    number : v.split('\n')[0].split(' ')[1][0],
-    items : v.split('\n')[1].split(':')[1].split(', ').map((w,j)=> Number(w)),
+    items : v.split('\n')[1].split(':')[1].split(', ').map((w)=> Number(w)),
     right : v.split('\n')[2].split('= ')[1].split(' ')[2],
     op : v.split('\n')[2].split('= ')[1].split(' ')[1],
     Test : Number(v.split('\n')[3].split(' ').pop()),
@@ -37,14 +36,14 @@ const moveItem = ((monkey,new_anx) => {
 
 const turn = ((monkey,new_anx) => {
     let a = Array.from({length : monkey.items.length})
-    a.map((v,i) => moveItem(monkey,new_anx))
+    a.map(() => moveItem(monkey,new_anx))
 })
 
-const round = ((new_anx) => monkeys.map((v,i) => turn (v,new_anx)))
+const round = ((new_anx) => monkeys.map((v) => turn (v,new_anx)))
 
 Array.from({length : 20}).map(() => round(new_anxietey1))
 
-const scores = monkeys.map((v,i) => v.score).sort((a,b) => b-a)
+const scores = monkeys.map((v) => v.score).sort((a,b) => b-a)
 const result1 = scores[0]*scores[1]
 
 monkeys = copy_m
@@ -61,7 +60,7 @@ const new_anxietey2 = ((anxiety,op,right) => {
 })
 
 Array.from({length : 10000}).map(() => round(new_anxietey2))
-const scores2 = monkeys.map((v,i) => v.score).sort((a,b) => b-a)
+const scores2 = monkeys.map((v) => v.score).sort((a,b) => b-a)
 const result2 = scores2[0]*scores2[1]
 
 console.timeEnd('\nExecution time')
