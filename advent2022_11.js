@@ -25,8 +25,7 @@ const new_anxietey1  = ((anxiety,op,right) => {
 })
 
 const moveItem = ((monkey,new_anx) => {
-    let anxiety =  new_anx(monkey.items[0], monkey.op, monkey.right)
-    monkey.items.shift()
+    let anxiety =  new_anx(monkey.items.pop(), monkey.op, monkey.right)
     if (anxiety % monkey.Test == 0) {
         monkeys[monkey.True].items.push(anxiety)
     } 
