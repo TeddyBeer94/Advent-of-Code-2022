@@ -15,15 +15,12 @@ const getcol = ((indexcol) => cases.map((v,i) => v[indexcol]))
 const height = ((char) => {
     if (char == 'S') {return 1}
     if (char == 'E') {return 26}
-    else {
-        return char.charCodeAt() -96
-    }
+    else {return char.charCodeAt() -96}
 })
 const height2 = ((char) => 26-height(char))
 
 const operation = ((tab,heightf) => tab.reduce((acc,cur) => {
-    if (acc == 0) {}
-    else{
+    if (acc != 0) {
         if (heightf(acc.letter)-heightf(cur.letter) <=1) {
             cur.neighbours.push(acc.position)
         }
@@ -36,7 +33,6 @@ const format = ((heightf) => {
     cases.map((v,i) => {
         operation(cases[i],heightf)
         operation(rev(cases[i]),heightf)})
-
     cases[0].map((v,i) => {
         operation(getcol(i),heightf)
         operation(rev(getcol(i)),heightf)})
@@ -53,21 +49,15 @@ const change_dist = ((tile) => tile.neighbours.map((v,i) => {
         cases[v.x][v.y].dist_to_S = tile.dist_to_S +1
         to_visit.push(cases[v.x][v.y])
     }
-}
-))
+}))
 
 const posS = cases.map(x => (x.filter(x => x.letter == 'S'))).filter(x => x.length >0)[0][0].position
-
 var to_visit = []
 
 const dist_to_E = (({xstart,ystart,charend,up}) => {
-    if (up) {
-        cases = cases_up
-    }
-    else {
-        cases = cases_down
-    }
-    to_visit.splice(0,to_visit.length)
+    if (up) {cases = cases_up}
+    else {cases = cases_down}
+    to_visit = []
     to_visit.push(cases[xstart][ystart])
     cases[xstart][ystart].dist_to_S = 0
     while (to_visit.length > 0) {
@@ -80,7 +70,6 @@ const dist_to_E = (({xstart,ystart,charend,up}) => {
 })
 
 const result1 = dist_to_E({xstart : posS.x , ystart : posS.y,charend : 'E',up : true})
-
 const result2 = dist_to_E({xstart : result1.position.x , ystart : result1.position.y,charend : 'a', up : false}).dist_to_S
 
 console.timeEnd('\nExecution time')
