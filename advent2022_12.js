@@ -17,7 +17,7 @@ const height = ((char) => {
     if (char == 'E') {return 26}
     else {return char.charCodeAt() -96}
 })
-const height2 = ((char) => 26-height(char))
+const height2 = ((char) => 27-height(char))
 
 const operation = ((tab,heightf) => tab.reduce((acc,cur) => {
     if (acc != 0) {
@@ -66,7 +66,7 @@ const dist_to_E = (({xstart,ystart,charend,up}) => {
         if (cases[min_pos.x][min_pos.y].letter == charend) {
             return cases[min_pos.x][min_pos.y]
         }
-        }
+    }
 })
 
 const result1 = dist_to_E({xstart : posS.x , ystart : posS.y,charend : 'E',up : true})
