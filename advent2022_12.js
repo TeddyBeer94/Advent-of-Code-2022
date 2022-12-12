@@ -48,7 +48,6 @@ const change_dist = ((tile) => tile.neighbours.map((v,i) => {
 }
 ))
 
-array.map((v,i) => ({x : v}))
 const getmin = (() => Array.from(to_visit).reduce((acc,cur) => {
     if (acc.dist_to_S > cur.dist_to_S) {
         return cur
