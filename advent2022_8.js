@@ -27,7 +27,7 @@ lines.map((v,i) => {
     operation(lines[i])
     operation(rev(lines[i]))})
 
-getcol(0).map((v,i) => {
+lines[0].map((v,i) => {
     operation(getcol(i))
     operation(rev(getcol(i)))})
 
