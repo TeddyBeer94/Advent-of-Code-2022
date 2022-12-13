@@ -2,7 +2,7 @@ import fs from 'fs';
 console.time('\nExecution time')
 const array = fs.readFileSync('adv2022_13_file', 'utf8').trim().split('\n\n');
 const packets = []
-const pairs = array.map((v,i) => ({
+const pairs = array.map((v) => ({
     left : JSON.parse(v.split('\n')[0]),
     right : JSON.parse(v.split('\n')[1]),
     ordered : false
@@ -41,11 +41,9 @@ const cmp_array = (({left,right}) => {
     }
 })
 
-pairs.map((v,i) => {
-    v.ordered = cmp_array(v)
-})
-
 const result1 = pairs.reduce((acc,cur,i) => {
+    cur.ordered = cmp_array(cur)
+    packets.push(cur.left); packets.push(cur.right)
     if (cur.ordered) {return acc + i +1}
     return acc
 }, 0)
@@ -56,10 +54,6 @@ const cmp_to_int = (({left,right}) => {
         case false : return 1
         case 'undecided' : return 0
     }
-})
-
-pairs.map((v,i) => {
-    packets.push(v.left); packets.push(v.right)
 })
 
 packets.push([[2]]) ; packets.push([[6]])
