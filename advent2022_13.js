@@ -41,9 +41,8 @@ const cmp_array = (({left,right}) => {
 })
 
 const result1 = pairs.reduce((acc,cur,i) => {
-    let is_inferior = cmp_array(cur)
     packets.push(cur.left); packets.push(cur.right)
-    if (is_inferior) {return acc + i +1}
+    if (cmp_array(cur)) {return acc + i +1}
     return acc
 }, 0)
 
