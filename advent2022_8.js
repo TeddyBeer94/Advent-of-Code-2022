@@ -5,7 +5,7 @@ var lines = array.map((v,i) => v.split('').map((w,j) => ({height : Number(w), se
 
 const rev = ((tab) => tab.map((v,i) => tab[tab.length -1 -i]))
 
-const getcol = ((indexcol) => lines.map((v,i) => v[indexcol]))
+const getcol = ((indexcol) => lines.map((v) => v[indexcol]))
 
 const operation = ((tab) => tab.reduce((acc,cur)=> {
     if (cur.height > acc.height ) {cur.seen = true , acc.height = cur.height }
