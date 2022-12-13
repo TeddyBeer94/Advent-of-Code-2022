@@ -5,7 +5,6 @@ const packets = []
 const pairs = array.map((v) => ({
     left : JSON.parse(v.split('\n')[0]),
     right : JSON.parse(v.split('\n')[1]),
-    ordered : false
 }))
 
 const cmp_array = (({left,right}) => {
@@ -42,9 +41,9 @@ const cmp_array = (({left,right}) => {
 })
 
 const result1 = pairs.reduce((acc,cur,i) => {
-    cur.ordered = cmp_array(cur)
+    let is_inferior = cmp_array(cur)
     packets.push(cur.left); packets.push(cur.right)
-    if (cur.ordered) {return acc + i +1}
+    if (is_inferior) {return acc + i +1}
     return acc
 }, 0)
 
