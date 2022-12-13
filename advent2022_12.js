@@ -28,7 +28,6 @@ const operation = ((tab,heightf) => tab.reduce((acc,cur) => {
     return {position : cur.position , letter : cur.letter}
 } , 0))
 
-
 const format = ((heightf) => {
     cases.map((v,i) => {
         operation(cases[i],heightf)
