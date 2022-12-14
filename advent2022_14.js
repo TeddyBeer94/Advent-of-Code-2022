@@ -57,7 +57,7 @@ const draw_lines = rock_lines.map((v) =>
         }
         return cur
     },0))
-   
+
 const copy_tunnel = JSON.parse(JSON.stringify(tunnel_map))
 
 const get_tunnel = (({x,y}) => {
@@ -105,7 +105,6 @@ const drop_sand = ((border) => {
     }
     return false
 })
-
 
 const all_drops = (() => {
     let stop = false
