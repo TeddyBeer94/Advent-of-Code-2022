@@ -21,7 +21,7 @@
         "day12": "node advent2022_12.js",
         "day13": "node advent2022_13.js",
         "day14": "node advent2022_14.js",
-        "test": "node test12.js",
+        "test": "node test14.js",
         "start": "ts-node ./src/index.ts"
     },
     "devDependencies": {
