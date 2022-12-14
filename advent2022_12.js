@@ -19,7 +19,7 @@ const height = ((char) => {
 })
 const height2 = ((char) => 27-height(char))
 
-const operation = ((tab,heightf) => tab.reduce((acc,cur) => {
+const find_left_neighbours = ((tab,heightf) => tab.reduce((acc,cur) => {
     if (acc != 0) {
         if (heightf(acc.letter)-heightf(cur.letter) <=1) {
             cur.neighbours.push(acc.position)
@@ -28,19 +28,19 @@ const operation = ((tab,heightf) => tab.reduce((acc,cur) => {
     return {position : cur.position , letter : cur.letter}
 } , 0))
 
-const format = ((heightf) => {
+const find_neighbours = ((heightf) => {
     cases.map((v,i) => {
-        operation(cases[i],heightf)
-        operation(rev(cases[i]),heightf)})
+        find_left_neighbours(cases[i],heightf)
+        find_left_neighbours(rev(cases[i]),heightf)})
     cases[0].map((v,i) => {
-        operation(getcol(i),heightf)
-        operation(rev(getcol(i)),heightf)})
+        find_left_neighbours(getcol(i),heightf)
+        find_left_neighbours(rev(getcol(i)),heightf)})
 }) 
 
-format(height)
+find_neighbours(height)
 const cases_up = JSON.parse(JSON.stringify(cases))
 cases = init
-format(height2)
+find_neighbours(height2)
 const cases_down = JSON.parse(JSON.stringify(cases))
 
 const change_dist = ((tile) => tile.neighbours.map((v,i) => {
