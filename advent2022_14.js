@@ -12,24 +12,6 @@ const signe = ((x) => {
     if (x<0) {return -1}
 })
 
-const minx = rock_lines.reduce((acc,cur) => {
-    let x = cur.reduce((acc1,cur1) => {
-        if (cur1.x < acc1) {return cur1.x}
-        return acc1
-    } , Infinity)
-    if (x < acc) {return x}
-    return acc
-},Infinity) 
-
-const maxx = rock_lines.reduce((acc,cur) => {
-    let x = cur.reduce((acc1,cur1) => {
-        if (cur1.x > acc1) {return cur1.x}
-        return acc1
-    } , 0)
-    if (x > acc) {return x}
-    return acc
-},0) 
-
 const maxy = rock_lines.reduce((acc,cur) => {
     let x = cur.reduce((acc1,cur1) => {
         if (cur1.y > acc1) {return cur1.y}
@@ -41,7 +23,7 @@ const maxy = rock_lines.reduce((acc,cur) => {
 
 var tunnel_map = new Object()
 
-const draw_lines = rock_lines.map((v) => 
+rock_lines.map((v) => 
     v.reduce((acc,cur) => {
         if (acc != 0) {
             if (cur.x == acc.x) {
@@ -62,7 +44,7 @@ const copy_tunnel = JSON.parse(JSON.stringify(tunnel_map))
 
 const get_tunnel = (({x,y}) => {
     let key =  y.toString() + ',' + x.toString()
-    if (key in tunnel_map) {
+    if (typeof(tunnel_map[key]) !== 'undefined') {
         return tunnel_map[key]
     }
     if (y == maxy +2) {
@@ -72,23 +54,15 @@ const get_tunnel = (({x,y}) => {
 })
 
 const move_sand = (({x,y,border}) => {
-    if (border && y == maxy) {return 'debordement'}
+    if (border && y == maxy ) {return 'debordement'}
     if (get_tunnel({x : x, y : y+1}) == '.') {
-        tunnel_map[(y+1).toString() +',' + x.toString()] = '+'
-        delete tunnel_map[y.toString() +',' + x.toString()]
         return {x : x, y : y+1}
     } else {
-        if (border && x == minx) {return 'debordement'}
         if (get_tunnel({x : x-1, y : y+1}) == '.') {
-            tunnel_map[(y+1).toString() +',' + (x-1).toString()] = '+'
-            delete tunnel_map[y.toString() +',' + x.toString()]
             return {x : x-1, y : y+1}
         }
         else {
-            if (border && x == maxx ) {return 'debordement'}
             if (get_tunnel({x : x+1 , y : y+1}) == '.') {
-                tunnel_map[(y+1).toString() +',' + (x+1).toString()] = '+'
-                delete tunnel_map[y.toString() +',' + x.toString()]
                 return {x : x+1, y : y+1}
             }
         }
@@ -99,7 +73,7 @@ const move_sand = (({x,y,border}) => {
 
 const drop_sand = ((border) => {
     let pos_s = {x : 500, y :0} ; let next_s = move_sand({...pos_s, border : border})
-    while (JSON.stringify(pos_s) !== JSON.stringify(next_s)) {
+    while (pos_s.x != next_s.x || pos_s.y != next_s.y) {
         pos_s = next_s ; next_s = move_sand({...pos_s, border : border})
         if (next_s == 'debordement') {return true}
     }
