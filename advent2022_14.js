@@ -43,26 +43,21 @@ rock_lines.map((v) =>
 const copy_tunnel = JSON.parse(JSON.stringify(tunnel_map))
 
 const get_tunnel = (({x,y}) => {
+    if (y == maxy +2) {return false}
     let key =  y.toString() + ',' + x.toString()
-    if (typeof(tunnel_map[key]) !== 'undefined') {
-        return tunnel_map[key]
+    return (typeof(tunnel_map[key]) == 'undefined')
     }
-    if (y == maxy +2) {
-        return '#'
-    }
-    return '.'
-})
+)
 
 const move_sand = (({x,y,border}) => {
     if (border && y == maxy ) {return 'debordement'}
-    if (get_tunnel({x : x, y : y+1}) == '.') {
-        return {x : x, y : y+1}
-    } else {
-        if (get_tunnel({x : x-1, y : y+1}) == '.') {
+    if (get_tunnel({x : x, y : y+1})) return {x : x, y : y+1}
+    else {
+        if (get_tunnel({x : x-1, y : y+1})) {
             return {x : x-1, y : y+1}
         }
         else {
-            if (get_tunnel({x : x+1 , y : y+1}) == '.') {
+            if (get_tunnel({x : x+1 , y : y+1})) {
                 return {x : x+1, y : y+1}
             }
         }
