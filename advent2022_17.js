@@ -16,7 +16,7 @@ const n = jet_pattern.length
 
 const to_key = (({x,y}) => x.toString()+','+y.toString())
 
-// position est la position du "coin inferieur droit" de l'objet 
+// position est la position du "coin inferieur gauche" du bloc 
 const is_valid = ((position, bloc_type) => bloc_type.reduce((acc,cur) => {
     if (acc) {
         let tile = {x : position.x + cur.x , y : position.y + cur.y}
@@ -34,9 +34,7 @@ const disp = (() => {
     for (let y = height-1 ; y >=0 ; y--) {
         for (let x = 0 ; x <=6 ; x++) {
             let key = to_key({x,y})
-            if(typeof(layout.get(key)) == 'undefined') {
-                image += '.'
-            }
+            if(typeof(layout.get(key)) == 'undefined') {image += '.'}
             else {image += layout.get(key)}
         }
         image += '\n'
@@ -69,16 +67,14 @@ const fall = ((bloc_type) => {
     bloc_type.map((v) => {
         let tile = {x : v.x + pos.x , y : v.y + pos.y}
         layout.set(to_key(tile),'#')
-        if (tile.y +1 > height) {
-            height = tile.y +1
-        }
+        if (tile.y +1 > height) {height = tile.y +1}
     })
 })
 
 const allfalls = (() => {
     for (let i = 0 ; i < 2022; i++) {
         let bloc_type = bloc_types[i%5]
-        fall(bloc_type) 
+        fall(bloc_type)
     }
 })
 
