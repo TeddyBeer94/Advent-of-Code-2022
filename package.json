@@ -24,6 +24,7 @@
         "day15": "node advent2022_15.js",
         "day16": "node advent2022_16.js",
         "day17": "node advent2022_17.js",
+        "day18": "node advent2022_18.js",
         "test": "node test16.js",
         "start": "ts-node ./src/index.ts"
     },
