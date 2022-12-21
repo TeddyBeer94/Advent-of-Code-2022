@@ -1,7 +1,7 @@
 import fs from 'fs';
 console.time('\nExecution time')
-const jet_pattern = fs.readFileSync('example','utf8').trim().split('')
-//const jet_pattern = fs.readFileSync('adv2022_17_file', 'utf8').trim().split('');
+//const jet_pattern = fs.readFileSync('example','utf8').trim().split('')
+const jet_pattern = fs.readFileSync('adv2022_17_file', 'utf8').trim().split('');
 
 let bloc_types = [Array.from({length : 4},(v,i) => ({x : i, y : 0})),
 [{x : 0 , y :1}, {x : 1 , y :1},{x : 2 , y :1},{x : 1 , y :2},{x : 1 , y :0}],
@@ -81,8 +81,7 @@ const allfalls = ((nb_blocks) => {
     }
 })
 
-allfalls(80)
-disp()
+allfalls(2022)
 
 console.timeEnd('\nExecution time')
 console.log(height)
