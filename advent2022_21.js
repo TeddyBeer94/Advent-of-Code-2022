@@ -44,14 +44,14 @@ const result1 = get_value(monkeys.get('root'))
 const find_father = ((monkey) =>
     format.reduce((acc,cur) => {
         if (acc == 0) {
-            if (cur.left == monkey.name || cur.right == monkey.name) {return cur}
+            if (cur.left === monkey.name || cur.right === monkey.name) {return cur}
         }
         return acc
     }, 0)
 )
 
 const find_downward_path = ((monkey) => {
-    if (monkey.name == 'root') {return [monkeys.get('root')]}
+    if (monkey.name === 'root') {return [monkeys.get('root')]}
     else {
         let p = find_downward_path(find_father(monkey))
         p.push(monkey)
