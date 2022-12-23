@@ -1,9 +1,9 @@
 import fs from 'fs';
 console.time('\nExecution time')
-//const array = fs.readFileSync('example20','utf8').trim().split('\n')
-const array = fs.readFileSync('adv2022_20_file', 'utf8').trim().split('\n');
+const array = fs.readFileSync('example20','utf8').trim().split('\n')
+//const array = fs.readFileSync('adv2022_20_file', 'utf8').trim().split('\n');
 
-const input = array.map((v,i) => ({value : Number(v), index : i}))
+var input = array.map((v,i) => ({value : Number(v), index : i}))
 const start = JSON.parse(JSON.stringify(input))
 
 const n = start.length
@@ -39,20 +39,19 @@ mix(start)
 var z = pos_zero()
 const result1 = input[(z+1000)%n].value + input[(z+2000)%n].value + input[(z+3000)%n].value
 
-/** 
+ 
 const key = 811589153 
 
 start.map((v) => v.value = key * v.value)
-console.lo
 const start2 = JSON.parse(JSON.stringify(start))
-input = start
-
+input = start2
+console.log(input)
 mix(start2)
-
+console.log(input)
 z = pos_zero()
 
 const result2 = input[(z+1000)%n].value + input[(z+2000)%n].value + input[(z+3000)%n].value
-*/
 
 console.timeEnd('\nExecution time')
 console.log(result1)
+console.log(result2)
