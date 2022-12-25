@@ -50,9 +50,9 @@ const disp = (() => {
 })
 
 //0 haut, 1 droite, 2 bas , 3 gauche
+
 const check_dir = ((position,dir) => {
     let to_check = []
-
     if (dir === 3) {to_check = Array.from({length : 3} , (v,i) => 
     ({x : position.x - 1, y : position.y -1 +i}))} 
     if (dir === 2) {to_check = Array.from({length : 3} , (v,i) => 
@@ -97,8 +97,7 @@ const next_move = ((position) => {
 })
 
 const round = (() => {
-    let nb_moves = 0
-    let next_positions = []
+    let nb_moves = 0 ; let next_positions = []
     let values = Array.from(map.values())
     values.map((v) => {
         let next_pos = next_move(v.position)
@@ -118,8 +117,7 @@ const round = (() => {
             }
         }
     })
-    offset +=1
-    return nb_moves
+    offset +=1 ; return nb_moves
 })
 
 const count_empty = (() => {
@@ -133,20 +131,16 @@ const count_empty = (() => {
     return sum
 })    
 
-
 let moves = Array.from({length : 10}).map(()=> round())
 const result1 = count_empty()
 
 const iterate = (() => {
-    let i = 11
-    let nb_moves = round() 
+    let i = 11 ; let nb_moves = round() 
     while(nb_moves > 0) {
-        i+=1
-        nb_moves = round()
+        i+=1 ; nb_moves = round()
     }
     return i
 })
-
 const result2 = iterate()
 
 console.timeEnd('\nExecution time')

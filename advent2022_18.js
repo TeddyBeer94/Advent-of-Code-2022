@@ -1,8 +1,6 @@
 import fs from 'fs';
 console.time('\nExecution time')
-//const array = fs.readFileSync('example18','utf8').trim().split('\n')
 const array = fs.readFileSync('adv2022_18_file', 'utf8').trim().split('\n');
-
 const cubes = array.map((v,i) => ({
     x: Number(v.split(',')[0]),
     y: Number(v.split(',')[1]),
@@ -38,7 +36,6 @@ cubes.map((v) => map_cubes.set(to_key(v),v))
 const neighbours = (({x,y,z}) => [{x :x+1,y,z},{x :x-1,y,z},
     {x,y : y + 1,z},{x,y :y-1,z},
     {x,y,z :z+1},{x,y,z: z-1}])    
-
 
 const set_outer = ((outer_tile) => {
     let correct_neigh = neighbours(outer_tile).filter(x => check(x))
