@@ -1,7 +1,6 @@
 import fs from 'fs';
-console.time('\nExecution time')
-const array = fs.readFileSync('example','utf8').trim().split('\n')
-//const array = fs.readFileSync('adv2022_16_file', 'utf8').trim().split('\n');
+console.time('\nPart 1 Execution time')
+const array = fs.readFileSync('adv2022_16_file', 'utf8').trim().split('\n');
 var valves0 = array.map((v,i) => ({
    name : v.split(';')[0].split(' ')[1],
    flow_rate : Number(v.split(';')[0].split('=')[1]),
@@ -116,8 +115,9 @@ const step2 = ((max) => {
 })
 
 const result1 = step1(30)
-const result2 = step2(26)
-
-console.timeEnd('\nExecution time')
+console.timeEnd('\nPart 1 Execution time')
 console.log(result1)
+
+console.log("this is likely going to take forever and/or throw a JavaScript heap out of range")
+const result2 = step2(26)
 console.log(result2)
