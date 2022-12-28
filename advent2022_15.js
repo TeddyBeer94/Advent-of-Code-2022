@@ -1,7 +1,7 @@
 import fs from 'fs';
-console.time('\nExecution time')
+console.time('\nPart 1 Execution time')
 const array = fs.readFileSync('adv2022_15_file', 'utf8').trim().split('\n');
-const lines0 = array.map((v,i) => ({ 
+const lines0 = array.map((v) => ({ 
     Sensor : {
         x : Number(v.split(':')[0].split(',').map((w) => w.split('=')[1])[0]) ,
         y : Number(v.split(':')[0].split(',').map((w) => w.split('=')[1])[1])},
@@ -14,11 +14,10 @@ const max = ((a,b) => {
     if (a >b) {return a}
     return b
 })
-
 const n = 2000000
 const limit = n*2
 const manhattan = (({x,y}) => Math.abs(x) + Math.abs(y))
-const lines = lines0.map((v,i) => ({...v, dist : manhattan({x : v.Sensor.x - v.Beacon.x, y : v.Sensor.y - v.Beacon.y})}))
+const lines = lines0.map((v) => ({...v, dist : manhattan({x : v.Sensor.x - v.Beacon.x, y : v.Sensor.y - v.Beacon.y})}))
 let map = new Map()
 
 const impossible_Beacon = ((n) => lines.map((v,i) => {
@@ -34,6 +33,11 @@ const impossible_Beacon = ((n) => lines.map((v,i) => {
 
 impossible_Beacon(n)
 const result1 = map.size
+
+console.timeEnd('\nPart 1 Execution time')
+console.log(result1)
+console.log("this is likely going to take several minutes")
+console.time('\nPart 2 Execution time')
 
 const join_int = (({int_tab ,inf,sup}) => {
     let included = false
@@ -67,9 +71,9 @@ const collapse = ((int_tab) => {
     return collapsed
 })
 
-const intervals = Array.from({length : limit +1} , (v,i) => [])
+const intervals = Array.from({length : limit +1} , () => [])
 
-const mapping2 = (() => lines.map((v,i) => {
+const mapping2 = (() => lines.map((v) => {
     for (let y = -v.dist ; y<= v.dist ; y++){
         let int = {inf : v.Sensor.x + Math.abs(y)- v.dist , sup : v.Sensor.x + v.dist-Math.abs(y)}
         if (y + v.Sensor.y <= limit && y + v.Sensor.y >=0) {
@@ -93,6 +97,5 @@ else {
 }
 
 const result2 = (limit * x) + correct_line.index 
-console.timeEnd('\nExecution time')
-console.log(result1)
+console.timeEnd('\nPart 2 Execution time')
 console.log(result2)

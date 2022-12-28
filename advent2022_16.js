@@ -36,7 +36,6 @@ const dist_to_start = ((start) => {
 })
 
 valves.forEach((value) => dist_to_start(value))
-
 let start_state = {open : [], time : 0, position : 'AA',score : 0}
 
 const next_states = ((state,max) => {
@@ -118,6 +117,6 @@ const result1 = step1(30)
 console.timeEnd('\nPart 1 Execution time')
 console.log(result1)
 
-console.log("this is likely going to take forever and/or throw a JavaScript heap out of range")
+console.log("this is likely going to take LITERALLY FOREVER and/or throw a JavaScript heap out of range")
 const result2 = step2(26)
 console.log(result2)

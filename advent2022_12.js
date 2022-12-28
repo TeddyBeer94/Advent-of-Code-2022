@@ -38,10 +38,10 @@ const find_neighbours = ((heightf) => {
 }) 
 
 find_neighbours(height)
-const cases_up = JSON.parse(JSON.stringify(cases))
+const case_up = JSON.parse(JSON.stringify(cases))
 cases = init
 find_neighbours(height2)
-const cases_down = JSON.parse(JSON.stringify(cases))
+const case_down = JSON.parse(JSON.stringify(cases))
 
 const change_dist = ((tile) => tile.neighbours.map((v,i) => {
     if (cases[v.x][v.y].dist_to_S > tile.dist_to_S +1) {
@@ -54,8 +54,8 @@ const posS = cases.map(x => (x.filter(x => x.letter == 'S'))).filter(x => x.leng
 var to_visit = []
 
 const dist_to_E = (({xstart,ystart,charend,up}) => {
-    if (up) {cases = cases_up}
-    else {cases = cases_down}
+    if (up) {cases = JSON.parse(JSON.stringify(case_up))}
+    else {cases = JSON.parse(JSON.stringify(case_down))}
     to_visit = []
     to_visit.push(cases[xstart][ystart])
     cases[xstart][ystart].dist_to_S = 0
