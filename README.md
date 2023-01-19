@@ -1,4 +1,4 @@
-Ce dépot contient mes codes pour l'édition 2022 d'Advent of Code.
+Ce dépot contient mes codes pour l'édition 2022 d'Advent of Code (CHENISBEST Aurélien).
 
 Jour 1 : Calorie Counting : Problème assez facile, ma solution de la partie 2 calcule le maximum, le retire du tableau et répete le procédé 3 fois, une façon plus élégante mais plus longue serait de trier le tableau et de récuperer ses 3 premières cases.
 
